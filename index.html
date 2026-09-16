@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>しまなみかぶぬしミーティング｜歴代ロゴ</title>
+  <title>しまなみかぶぬしミーティングの歩み</title>
 
   <style>
     * {
@@ -28,16 +28,37 @@
 
     .scene {
       width: min(94vw, 900px);
-      height: 88vh;
+      height: 92vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
+    .title {
+      text-align: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+
+    .title h1 {
+      margin: 0 0 8px;
+      font-size: clamp(20px, 4vw, 32px);
+      font-weight: normal;
+      letter-spacing: 0.08em;
+    }
+
+    .title h2 {
+      margin: 0;
+      font-size: clamp(13px, 2.5vw, 18px);
+      font-weight: normal;
+      letter-spacing: 0.08em;
+    }
+
     .logo-area {
       width: 100%;
-      height: calc(100% - 55px);
+      flex: 1;
+      min-height: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -53,7 +74,7 @@
     }
 
     .info {
-      height: 55px;
+      height: 45px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -61,20 +82,21 @@
       font-size: 13px;
       letter-spacing: 0.04em;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     @media (max-width: 480px) {
       .scene {
         width: 94vw;
-        height: 84vh;
+        height: 90vh;
       }
 
-      .logo-area {
-        height: calc(100% - 50px);
+      .title {
+        margin-bottom: 12px;
       }
 
       .info {
-        height: 50px;
+        height: 40px;
         font-size: 12px;
       }
     }
@@ -85,18 +107,21 @@
 
   <div class="scene">
 
+    <div class="title">
+      <h1>しまなみかぶぬしミーティングの歩み</h1>
+      <h2>5th anniversary &amp; 10th meeting</h2>
+    </div>
+
     <div class="logo-area">
       <img
         id="logo"
         class="logo"
-        src="logo00.jpg"
-        alt="しまなみかぶぬしミーティング"
+        src="5th-02.jpg"
+        alt="5th anniversary & 10th meeting"
       >
     </div>
 
-    <div class="info" id="info">
-      第1回　2022年 9月25日 / 00回 in大三島
-    </div>
+    <div class="info" id="info"></div>
 
   </div>
 
@@ -105,47 +130,47 @@
     const meetings = [
       {
         image: "logo00.jpg",
-        info: "第1回　2022年 9月25日 / 00回 in大三島"
+        info: "第1回　2022年9月25日 / 00回 in大三島"
       },
       {
         image: "logo01.jpg",
-        info: "第２回　2022年12月 4日 / 01回 in大島"
+        info: "第2回　2022年12月4日 / 01回 in大島"
       },
       {
         image: "logo02.jpg",
-        info: "第３回　2023年 3月19日 / 02回 in大三島"
+        info: "第3回　2023年3月19日 / 02回 in大三島"
       },
       {
         image: "logo03.jpg",
-        info: "第４回　2023年11月12日 / 03回 in生口島"
+        info: "第4回　2023年11月12日 / 03回 in生口島"
       },
       {
         image: "logo04.jpg",
-        info: "第５回　2024年 3月17日 / 04回 in伯方島"
+        info: "第5回　2024年3月17日 / 04回 in伯方島"
       },
       {
         image: "logo05.jpg",
-        info: "第６回　2024年10月 6日 / 05回 in大三島"
+        info: "第6回　2024年10月6日 / 05回 in大三島"
       },
       {
         image: "logo06.jpg",
-        info: "第７回　2025年 3月16日 / 06回 in因島"
-      },
-      {
-        image: "logo06Again.jpg",
-        info: "第８回　2025年 4月27日 / 06回 in因島 Again!"
+        info: "第7回　2025年3月16日 / 06回 in因島"
       },
       {
         image: "logo07.jpg",
-        info: "第９回　2025年10月26日 / 07回 in大三島"
+        info: "第8回　2025年4月27日 / 06回 in因島 Again!"
       },
       {
         image: "logo08.jpg",
-        info: "第10回　2026年 4月26日 / 08回 in大三島"
+        info: "第9回　2025年10月26日 / 07回 in大三島"
+      },
+      {
+        image: "logo09.jpg",
+        info: "第10回　2026年4月26日 / 08回 in大三島"
       }
     ];
 
-    let current = 0;
+    let current = -1;
 
     const logo = document.getElementById("logo");
     const info = document.getElementById("info");
