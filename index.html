@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -22,7 +23,6 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -85,6 +85,48 @@
       flex-shrink: 0;
     }
 
+    .next-button {
+      border: none;
+      background: none;
+      padding: 4px;
+      margin: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .next-button img {
+      display: block;
+      width: auto;
+      height: 55px;
+      max-width: 120px;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .next-button:focus {
+      outline: none;
+    }
+
+    .next-event {
+      text-align: center;
+    }
+
+    .next-event .label {
+      font-size: clamp(15px, 3vw, 20px);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .next-event .date {
+      font-size: clamp(22px, 5vw, 36px);
+      letter-spacing: 0.08em;
+    }
+
     @media (max-width: 480px) {
       .scene {
         width: 94vw;
@@ -99,29 +141,41 @@
         height: 40px;
         font-size: 12px;
       }
+
+      .next-button img {
+        height: 48px;
+        max-width: 100px;
+      }
     }
   </style>
+
 </head>
 
 <body>
 
   <div class="scene">
 
-    <div class="title">
-      <h1>しまなみかぶぬしミーティングの歩み</h1>
-      <h2>5th anniversary &amp; 10th meeting</h2>
-    </div>
+```
+<div class="title">
+  <h1>しまなみかぶぬしミーティングの歩み</h1>
+  <h2>5th anniversary &amp; 10th meeting</h2>
+</div>
 
-    <div class="logo-area">
-      <img
-        id="logo"
-        class="logo"
-        src="5th-02.jpg"
-        alt="5th anniversary & 10th meeting"
-      >
-    </div>
+<div class="logo-area" id="logoArea">
+  <img
+    id="logo"
+    class="logo"
+    src="5th-02.jpg"
+    alt="5th anniversary & 10th meeting"
+  >
+</div>
 
-    <div class="info" id="info"></div>
+<div class="info" id="info"></div>
+
+<button class="next-button" id="nextButton" aria-label="次へ">
+  <img src="tap.png" alt="TAP">
+</button>
+```
 
   </div>
 
@@ -157,35 +211,54 @@
         info: "第7回　2025年3月16日 / 06回 in因島"
       },
       {
-        image: "logo06Again.jpg",
+        image: "logo07.jpg",
         info: "第8回　2025年4月27日 / 06回 in因島 Again!"
       },
       {
-        image: "logo07.jpg",
+        image: "logo08.jpg",
         info: "第9回　2025年10月26日 / 07回 in大三島"
       },
       {
-        image: "logo08.jpg",
+        image: "logo09.jpg",
         info: "第10回　2026年4月26日 / 08回 in大三島"
       }
     ];
 
     let current = -1;
 
-    const logo = document.getElementById("logo");
+    const logoArea = document.getElementById("logoArea");
     const info = document.getElementById("info");
+    const nextButton = document.getElementById("nextButton");
 
-    document.body.addEventListener("click", () => {
+    nextButton.addEventListener("click", () => {
 
       current++;
 
-      if (current >= meetings.length) {
-        current = 0;
-      }
+      if (current < meetings.length) {
 
-      logo.src = meetings[current].image;
-      logo.alt = meetings[current].info;
-      info.textContent = meetings[current].info;
+        logoArea.innerHTML = `
+          <img
+            class="logo"
+            src="${meetings[current].image}"
+            alt="${meetings[current].info}"
+          >
+        `;
+
+        info.textContent = meetings[current].info;
+
+      } else {
+
+        logoArea.innerHTML = `
+          <div class="next-event">
+            <div class="label">次回開催</div>
+            <div class="date">2027年4月予定</div>
+          </div>
+        `;
+
+        info.textContent = "";
+
+        current = -1;
+      }
 
     });
 
