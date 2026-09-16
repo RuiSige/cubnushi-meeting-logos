@@ -64,10 +64,12 @@
       justify-content: center;
     }
 
-    .logo {
+    .main-image {
       display: block;
       max-width: 100%;
       max-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
@@ -167,15 +169,15 @@
 
   <div class="scene">
 
-
+```
 <div class="title">
   <h1>しまなみかぶぬしミーティングの歩み</h1>
   <h2>5th anniversary &amp; 10th meeting</h2>
 </div>
 
-<div class="logo-area" id="logoArea">
+<div class="logo-area" id="imageArea">
   <img
-    class="logo"
+    class="main-image"
     src="5th-02.jpg"
     alt="5th anniversary & 10th meeting"
   >
@@ -187,7 +189,7 @@
   <img src="tap.png" alt="CUB">
   <div class="tap-text">CUBをタップ</div>
 </button>
-
+```
 
   </div>
 
@@ -195,84 +197,144 @@
 
     const meetings = [
       {
-        image: "logo00.jpg",
+        logo: "logo00.jpg",
+        flyer: "flyer00.jpg",
         info: "第1回　2022年9月25日 / 00回 in大三島"
       },
       {
-        image: "logo01.jpg",
+        logo: "logo01.jpg",
+        flyer: "flyer01.jpg",
         info: "第2回　2022年12月4日 / 01回 in大島"
       },
       {
-        image: "logo02.jpg",
+        logo: "logo02.jpg",
+        flyer: "flyer02.jpg",
         info: "第3回　2023年3月19日 / 02回 in大三島"
       },
       {
-        image: "logo03.jpg",
+        logo: "logo03.jpg",
+        flyer: "flyer03.jpg",
         info: "第4回　2023年11月12日 / 03回 in生口島"
       },
       {
-        image: "logo04.jpg",
+        logo: "logo04.jpg",
+        flyer: "flyer04.jpg",
         info: "第5回　2024年3月17日 / 04回 in伯方島"
       },
       {
-        image: "logo05.jpg",
+        logo: "logo05.jpg",
+        flyer: "flyer05.jpg",
         info: "第6回　2024年10月6日 / 05回 in大三島"
       },
       {
-        image: "logo06.jpg",
+        logo: "logo06.jpg",
+        flyer: "flyer06.jpg",
         info: "第7回　2025年3月16日 / 06回 in因島"
       },
       {
-        image: "logo06Again.jpg",
+        logo: "logo06Again.jpg",
+        flyer: "flyer06Again.jpg",
         info: "第8回　2025年4月27日 / 06回 in因島 Again!"
       },
       {
-        image: "logo07.jpg",
+        logo: "logo07.jpg",
+        flyer: "flyer07.jpg",
         info: "第9回　2025年10月26日 / 07回 in大三島"
       },
       {
-        image: "logo08.jpg",
+        logo: "logo08.jpg",
+        flyer: "flyer08.jpg",
         info: "第10回　2026年4月26日 / 08回 in大三島"
       }
     ];
 
     let current = -1;
+    let showingFlyer = false;
 
-    const logoArea = document.getElementById("logoArea");
+    const imageArea = document.getElementById("imageArea");
     const info = document.getElementById("info");
     const nextButton = document.getElementById("nextButton");
 
     nextButton.addEventListener("click", () => {
 
-      current++;
+      // 表紙から第1回へ
+      if (current === -1) {
 
-      if (current < meetings.length) {
+        current = 0;
+        showingFlyer = false;
 
-        logoArea.innerHTML = `
-          <img
-            class="logo"
-            src="${meetings[current].image}"
-            alt="${meetings[current].info}"
-          >
-        `;
+        showLogo();
 
-        info.textContent = meetings[current].info;
-
-      } else {
-
-        logoArea.innerHTML = `
-          <div class="next-event">
-            <div class="label">次回開催</div>
-            <div class="date">2027年4月予定</div>
-          </div>
-        `;
-
-        info.textContent = "";
-
-        current = -1;
+        return;
       }
 
+      // ロゴからチラシへ
+      if (!showingFlyer) {
+
+        showingFlyer = true;
+
+        showFlyer();
+
+        return;
+      }
+
+      // チラシから次の回へ
+      current++;
+      showingFlyer = false;
+
+      // 第10回のチラシの次
+      if (current >= meetings.length) {
+
+        showNextEvent();
+
+        return;
+      }
+
+      showLogo();
+
     });
+
+    function showLogo() {
+
+      imageArea.innerHTML = `
+        <img
+          class="main-image"
+          src="${meetings[current].logo}"
+          alt="${meetings[current].info}"
+        >
+      `;
+
+      info.textContent = meetings[current].info;
+    }
+
+    function showFlyer() {
+
+      imageArea.innerHTML = `
+        <img
+          class="main-image"
+          src="${meetings[current].flyer}"
+          alt="${meetings[current].info} チラシ"
+        >
+      `;
+
+      info.textContent = meetings[current].info;
+    }
+
+    function showNextEvent() {
+
+      imageArea.innerHTML = `
+        <div class="next-event">
+          <div class="label">次回開催</div>
+          <div class="date">2027年4月予定</div>
+        </div>
+      `;
+
+      info.textContent = "";
+
+      // 次回開催画面の次は表紙
+      current = -1;
+      showingFlyer = false;
+    }
 
   </script>
 
