@@ -88,10 +88,11 @@
     .next-button {
       border: none;
       background: none;
-      padding: 4px;
+      padding: 0;
       margin: 0;
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
@@ -101,11 +102,18 @@
     .next-button img {
       display: block;
       width: auto;
-      height: 55px;
-      max-width: 120px;
+      height: 75px;
+      max-width: 150px;
       object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
+    }
+
+    .tap-text {
+      margin-top: 3px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: #555;
     }
 
     .next-button:focus {
@@ -143,8 +151,12 @@
       }
 
       .next-button img {
-        height: 48px;
-        max-width: 100px;
+        height: 65px;
+        max-width: 130px;
+      }
+
+      .tap-text {
+        font-size: 11px;
       }
     }
   </style>
@@ -163,7 +175,6 @@
 
 <div class="logo-area" id="logoArea">
   <img
-    id="logo"
     class="logo"
     src="5th-02.jpg"
     alt="5th anniversary & 10th meeting"
@@ -173,7 +184,8 @@
 <div class="info" id="info"></div>
 
 <button class="next-button" id="nextButton" aria-label="次へ">
-  <img src="tap.png" alt="TAP">
+  <img src="tap.png" alt="CUB">
+  <div class="tap-text">CUBをタップ</div>
 </button>
 ```
 
@@ -211,15 +223,15 @@
         info: "第7回　2025年3月16日 / 06回 in因島"
       },
       {
-        image: "logo07.jpg",
+        image: "logo06Again.jpg",
         info: "第8回　2025年4月27日 / 06回 in因島 Again!"
       },
       {
-        image: "logo08.jpg",
+        image: "logo07.jpg",
         info: "第9回　2025年10月26日 / 07回 in大三島"
       },
       {
-        image: "logo09.jpg",
+        image: "logo08.jpg",
         info: "第10回　2026年4月26日 / 08回 in大三島"
       }
     ];
